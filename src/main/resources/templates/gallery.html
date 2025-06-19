@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gallery</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<h1>Image Gallery</h1>
+
+<div>
+    <div th:each="imgUrl : ${imageList}">
+        <img th:src="@{${imgUrl}}" alt="Image" width="200" />
+    </div>
+</div>
+
+<a th:href="@{/}">Back to Home</a>
+</body>
+</html>

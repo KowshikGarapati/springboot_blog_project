@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <title>Home page</title>
+    </head>
+    <body>
+        <h1>welcome to kowshik's first springboot website.</h1>
+        <form th:action="@{/hello}" >
+            <label for="name"> enter your name:</label>
+            <input type="text" name="name" id="name">
+            <input type="submit">
+        </form>
+        <a th:href="@{/gallery}">click here to view hayaansh's gallery</a>
+    </body>
+</html>
