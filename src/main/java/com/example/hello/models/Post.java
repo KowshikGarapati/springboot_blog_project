@@ -9,7 +9,8 @@ public class Post {
     private String title;
     private String content;
     private int likes;
-//2nc10uzT6ch10qGncvhE9t8Fn3w_7iQnTDLUx81naVbr5MpUw
+
+
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User author ;

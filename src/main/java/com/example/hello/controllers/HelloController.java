@@ -9,7 +9,9 @@ import com.example.hello.repositories.UserRepository;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -45,6 +47,28 @@ public class HelloController {
         model.addAttribute("imageList", imageList);
         return "gallery" ;
 
+    }
+
+    @GetMapping("/addeduser")
+    public String addeduser(@RequestParam String firstname,
+                            @RequestParam String lastname,
+                            @RequestParam String email,
+                            @RequestParam String password,
+                            @RequestParam String confirm_password,
+                            Model model){
+        Map<String, String> data = new HashMap<>();
+        data.put("firstname", firstname );
+        data.put("lastname", lastname);
+        data.put("email", email);
+        data.put("password", password);
+        data.put("confirm_password", confirm_password);
+        model.addAllAttributes(data);
+        return "htmlFileForTesting" ;
+    }
+
+    @GetMapping("/register")
+    public String addAnUser(){
+        return "registerForm" ;
     }
 
 

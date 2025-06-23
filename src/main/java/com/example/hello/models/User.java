@@ -14,15 +14,19 @@ public class User {
     private String lastname;
     private String password;
     private String email;
-    private String adress;
+    private String address;
     private String genre;
-
+    private String username;
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL)
     private List<Post> posts ;
 
     public User() {}
 
     // Getters and setters
+
+    public String getUsername() {return username;}
+    public void setUsername(String username) {this.username = username;}
+
     public Long getId() { return id; }
     public void setId(Long id) { this.id = id; }
 
@@ -38,8 +42,8 @@ public class User {
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-    public String getAdress() { return adress; }
-    public void setAdress(String adress) { this.adress = adress; }
+    public String getAdress() { return address; }
+    public void setAdress(String adress) { this.address = adress; }
 
     public String getGenre() { return genre; }
     public void setGenre(String genre) { this.genre = genre; }
