@@ -1,41 +1,39 @@
 package com.example.hello.controllers;
 
 
+import com.example.hello.models.Post;
 import com.example.hello.models.User;
+import com.example.hello.services.PostService;
 import com.example.hello.services.UserService;
-import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.URI;
 import java.security.Principal;
 import java.util.*;
 
 @RestController
-@RequestMapping("/users")
-public class UserController {
+public class APIController {
 
     @Autowired
-    private UserService service;
+    private UserService userService;
 
-    @GetMapping("/allUsers")
+    @Autowired
+    private PostService postService;
+
+    @GetMapping("/users/allUsers")
     public List<User> displayAllUsers(){
-        List<User> allUsers = service.getAllUsers();
+        List<User> allUsers = userService.getAllUsers();
         return allUsers ;
     }
 
-    @PostMapping("/addUser")
+    @PostMapping("/users/addUser")
     public ResponseEntity<Void> addUser(@ModelAttribute User user) {
-        service.addUser(user);
+        userService.addUser(user);
         System.out.println("Logic executed!");
         // redirect to another route (e.g., /next)
         HttpHeaders headers = new HttpHeaders();
@@ -43,7 +41,18 @@ public class UserController {
         return new ResponseEntity<>(headers, HttpStatus.FOUND);
     }
 
-    @GetMapping("/getSessionId")
+    @PostMapping("/users/createNewPost")
+    public ResponseEntity<Void> createNewPost(@ModelAttribute Post post, Principal principal) {
+        post.setAuthor(userService.getUserByName(principal.getName()));
+        postService.addPost(post);
+        System.out.println("Logic executed!");
+        // redirect to another route (e.g., /next)
+        HttpHeaders headers = new HttpHeaders();
+        headers.setLocation(URI.create("/"));
+        return new ResponseEntity<>(headers, HttpStatus.FOUND);
+    }
+
+    @GetMapping("/users/getSessionId")
     public String getSessionId(HttpServletRequest http){
         return http.getSession().getId();
     }
@@ -52,11 +61,14 @@ public class UserController {
     @GetMapping("/loggedUser")
     public User getLoggedUser(Principal principal){
         String loggedUserName = principal.getName() ;
-        User loggedUser = service.getUserByName(loggedUserName);
+        User loggedUser = userService.getUserByName(loggedUserName);
         return loggedUser ;
     }
 
 }
+
+
+
 /* @RequestParam String firstname,
             @RequestParam String lastname,
             @RequestParam String email,

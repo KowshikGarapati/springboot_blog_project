@@ -42,8 +42,8 @@ public class User {
     public String getEmail() { return email; }
     public void setEmail(String email) { this.email = email; }
 
-    public String getAdress() { return address; }
-    public void setAdress(String adress) { this.address = adress; }
+    public String getAddress() { return address; }
+    public void setAddress(String adress) { this.address = adress; }
 
     public String getGenre() { return genre; }
     public void setGenre(String genre) { this.genre = genre; }

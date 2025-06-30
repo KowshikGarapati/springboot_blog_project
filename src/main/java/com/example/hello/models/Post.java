@@ -7,6 +7,9 @@ public class Post {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String title;
+
+    @Lob
+    @Column(columnDefinition = "TEXT")
     private String content;
     private int likes;
 
@@ -30,10 +33,10 @@ public class Post {
     public int getLikes() { return likes; }
     public void setLikes(int likes) { this.likes = likes; }
 
-    public User getAuthor() { return author; }
+    public String getAuthor() { return author.getUsername() ; }
     public void setAuthor(User author) { this.author = author; }
 
     public String getPostDetails(){
-        return this.id +"\n"+ this.title +"\n"+this.content ;
+        return this.id.toString() + " " + this.title + "  " +this.content ;
     }
 }
