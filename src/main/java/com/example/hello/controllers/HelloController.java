@@ -27,7 +27,7 @@ public class HelloController {
     public String hello(Principal principal, Model model){
         User loggedUser = service.getUserByName(principal.getName());
         model.addAttribute("user", loggedUser);
-        return "home" ;
+        return "profile" ;
     }
 
     @GetMapping("/hello")
@@ -63,10 +63,6 @@ public class HelloController {
         return "htmlFileForTesting" ;
     }
 
-    @GetMapping("/register")
-    public String addAnUser(){
-        return "registerForm" ;
-    }
 
     @GetMapping("/newPost")
     public String renderPostCreatingForm(Model model, Principal principal){

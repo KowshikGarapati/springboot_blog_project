@@ -23,14 +23,23 @@ public class UserConfiguration {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/h2-console/**", "/register", "/css/**", "/js/**").permitAll()
                         .anyRequest().authenticated()
                 )
                 .csrf(csrf -> csrf
                         .ignoringRequestMatchers("/h2-console/**")
                 )
                 .headers(headers -> headers.frameOptions().sameOrigin())
-                .formLogin(Customizer.withDefaults()); // or .httpBasic();
+                .formLogin(form -> form
+                        .loginPage("/login")
+                        .defaultSuccessUrl("/", true)
+                        .failureUrl("/login?error")
+                        .permitAll()
+                )
+                .logout(logout -> logout
+                        .logoutSuccessUrl("/logout") // Redirect on logout /login?logout
+                        .permitAll()
+                );
                 http.httpBasic(Customizer.withDefaults());
         return http.build();
     }

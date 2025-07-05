@@ -33,4 +33,13 @@ public class UserService {
         return userRepository.save(user) ;
     }
 
+
+    public void registerUser(String username, String email, String password) {
+        User user = new User();
+        user.setUsername(username);
+        user.setEmail(email);
+        user.setPassword(password);
+        userRepository.save(user);
+    }
+
 }
