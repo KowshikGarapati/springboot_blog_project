@@ -66,13 +66,16 @@
             <div th:if="${users != null and !users.isEmpty()}">
                 <h5>Users</h5>
                 <div th:each="user : ${users}" class="mb-3">
-                    <div class="card">
+                    <a th:href="@{/profile/{username}(username=${user.username})}" style="display: block; text-decoration: none; color: inherit;">
+                    <div class="card" >
                         <div class="card-body">
                             <h5 th:text="${user.username}">Username</h5>
+                            <p th:text="${user.firstname}"></p>
                             <p th:text="${user.email}">Email</p>
                             <p th:text="${user.address}">Address</p>
                         </div>
                     </div>
+                    </a>
                 </div>
             </div>
 

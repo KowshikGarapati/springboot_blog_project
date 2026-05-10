@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -40,6 +41,42 @@ public class UserService {
         user.setEmail(email);
         user.setPassword(password);
         userRepository.save(user);
+    }
+
+    public void updateUser(String principalName, String username, String firstname, String lastname, String email, String password, String address, String phone, String genre){
+        User currentUser = this.getUserByName(principalName);
+        currentUser.setUsername(username);
+        currentUser.setFirstname(firstname);
+        currentUser.setLastname(lastname);
+        currentUser.setPassword(password);
+        currentUser.setEmail(email);
+        currentUser.setPhone(phone);
+        currentUser.setAddress(address);
+        currentUser.setGenre(genre);
+        userRepository.save(currentUser);
+    }
+
+    public void followUser(String currentUsername, String targetUsername) {
+        User currUser = userRepository.findByUsername(currentUsername);
+        User targetUser = userRepository.findByUsername(targetUsername);
+
+        currUser.getFollowing().add(targetUser);
+        userRepository.save(currUser);
+    }
+
+    public void unfollowUser(String currentUsername, String targetUsername) {
+        User currentUser = userRepository.findByUsername(currentUsername);
+        User targetUser = userRepository.findByUsername(targetUsername);
+
+        currentUser.getFollowing().remove(targetUser);
+        userRepository.save(currentUser);
+    }
+
+    public boolean isFollowing(User currentUser, User targetUser) {
+        if (currentUser == null || targetUser == null) {
+            return false;
+        }
+        return currentUser.getFollowing().contains(targetUser);
     }
 
 }

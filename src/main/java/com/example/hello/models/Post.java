@@ -1,7 +1,21 @@
 package com.example.hello.models;
+import java.time.LocalDateTime;
+
 import jakarta.persistence.*;
 
+import lombok.Getter;
+import lombok.Setter;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+
 @Entity
+
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,24 +32,17 @@ public class Post {
     @JoinColumn(name = "user_id")
     private User author ;
 
-    public Post() {}
+    @Enumerated(EnumType.STRING)
+    private PostType type;
 
-    // ✅ Getters and Setters
-    public Long getId() { return id; }
-    public void setId(Long id) { this.id = id; }
+    private String bookTitle;
 
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
+    private String bookAuthor;
 
-    public String getContent() { return content; }
-    public void setContent(String content) { this.content = content; }
+    private Integer rating;
 
-    public int getLikes() { return likes; }
-    public void setLikes(int likes) { this.likes = likes; }
-
-    public String getAuthor() { return author.getUsername() ; }
-    public void setAuthor(User author) { this.author = author; }
-
+    private LocalDateTime createdAt;
+    
     public String getPostDetails(){
         return this.id.toString() + " " + this.title + "  " +this.content ;
     }

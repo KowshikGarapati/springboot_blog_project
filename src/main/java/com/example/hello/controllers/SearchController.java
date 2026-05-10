@@ -10,12 +10,16 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
 public class SearchController {
 
     private final SearchService searchService;
+
+    @Autowired
+    private UserService userService ;
 
     public SearchController(SearchService searchService) {
         this.searchService = searchService;
@@ -38,5 +42,14 @@ public class SearchController {
         model.addAttribute("query", query); // keep input filled
 
         return "search";
+    }
+
+    @GetMapping("/profile/{username}")
+    public String getSearchedUser(@PathVariable("username") String username, Model model , Principal principal){
+        User searchedUser = userService.getUserByName(username);
+        User currentUser = userService.getUserByName(principal.getName());
+        model.addAttribute("searcheduser", searchedUser);
+        model.addAttribute("isFollowedByCurrentuser", userService.isFollowing(currentUser, searchedUser));
+        return "profile" ;
     }
 }

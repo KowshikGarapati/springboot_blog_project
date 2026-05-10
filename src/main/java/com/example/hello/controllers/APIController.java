@@ -31,6 +31,8 @@ public class APIController {
         return allUsers ;
     }
 
+    
+
     @PostMapping("/users/addUser")
     public ResponseEntity<Void> addUser(@ModelAttribute User user) {
         userService.addUser(user);
