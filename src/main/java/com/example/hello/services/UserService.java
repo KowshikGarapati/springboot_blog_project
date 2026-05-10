@@ -1,9 +1,10 @@
 package com.example.hello.services;
 
-
 import com.example.hello.models.User;
 import com.example.hello.repositories.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -16,6 +17,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<User> getAllUsers(){
         return userRepository.findAll();
@@ -39,7 +43,7 @@ public class UserService {
         User user = new User();
         user.setUsername(username);
         user.setEmail(email);
-        user.setPassword(password);
+        user.setPassword(passwordEncoder.encode(password));
         userRepository.save(user);
     }
 
@@ -48,7 +52,7 @@ public class UserService {
         currentUser.setUsername(username);
         currentUser.setFirstname(firstname);
         currentUser.setLastname(lastname);
-        currentUser.setPassword(password);
+        currentUser.setPassword(passwordEncoder.encode(password));
         currentUser.setEmail(email);
         currentUser.setPhone(phone);
         currentUser.setAddress(address);
