@@ -2,6 +2,7 @@ package com.example.hello.services;
 
 
 import com.example.hello.models.Post;
+import com.example.hello.models.PostType;
 import com.example.hello.models.User;
 import com.example.hello.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,4 +32,5 @@ public class PostService {
     public Post addPost(Post post){
         return postRepository.save(post) ;
     }
+
 }

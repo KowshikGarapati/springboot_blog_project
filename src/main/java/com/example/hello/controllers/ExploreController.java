@@ -1,6 +1,7 @@
 package com.example.hello.controllers;
 
 import com.example.hello.models.Post;
+import com.example.hello.models.PostType;
 import com.example.hello.services.ExploreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,4 +25,47 @@ public class ExploreController {
 
     }
 
+    @GetMapping("/explore/stories")
+    public String storiesPage(Model model){
+
+        model.addAttribute(
+            "posts",
+            exploreService.getPostsByType(PostType.STORY)
+        );
+
+        return "stories";
+    }
+
+    @GetMapping("/explore/poems")
+    public String poemsPage(Model model){
+
+        model.addAttribute(
+            "posts",
+            exploreService.getPostsByType(PostType.POEM)
+        );
+
+        return "poems";
+    }
+
+    /*@GetMapping("/explore/essays")
+    public String essaysPage(Model model){
+
+        model.addAttribute(
+            "posts",
+            exploreService.getPostsByType(PostType.ESSAY)
+        );
+
+        return "essays";
+    }*/
+
+    @GetMapping("/explore/reviews")
+    public String reviewsPage(Model model){
+
+        model.addAttribute(
+            "posts",
+            exploreService.getPostsByType(PostType.REVIEW)
+        );
+
+        return "reviews";
+    }
 }

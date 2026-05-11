@@ -1,6 +1,7 @@
 package com.example.hello.services;
 
 import com.example.hello.models.Post;
+import com.example.hello.models.PostType;
 import com.example.hello.repositories.PostRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,5 +18,9 @@ public class ExploreService {
 
     public List<Post> ExplorePosts() {
         return postRepository.findAll();
+    }
+    
+    public List<Post> getPostsByType(PostType type){
+        return postRepository.findByType(type);
     }
 }
