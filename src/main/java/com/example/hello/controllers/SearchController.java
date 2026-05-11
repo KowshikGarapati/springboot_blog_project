@@ -2,9 +2,11 @@ package com.example.hello.controllers;
 
 
 import com.example.hello.models.Post;
+import com.example.hello.models.PostType;
 import com.example.hello.models.User;
 import com.example.hello.services.SearchService;
 import com.example.hello.services.UserService;
+import com.example.hello.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,6 +21,9 @@ public class SearchController {
     private final SearchService searchService;
 
     @Autowired
+    private PostService postService;
+
+    @Autowired
     private UserService userService ;
 
     public SearchController(SearchService searchService) {
@@ -31,18 +36,45 @@ public class SearchController {
     }
 
     @PostMapping("/search")
-    public String handleSearch(@RequestParam("query") String query, Model model) throws Exception{
-        List<User> users = searchService.searchUsers(query);
-        System.out.println("got users from query info");
-        List<Post> posts = searchService.searchPosts(query);
-        System.out.println("got posts from query info");
+public String search(
+        @RequestParam String query,
+        Model model
+) {
 
-        model.addAttribute("users", users);
-        model.addAttribute("posts", posts);
-        model.addAttribute("query", query); // keep input filled
+    model.addAttribute("query", query);
 
-        return "search";
-    }
+    model.addAttribute(
+            "users",
+            userService.searchUsers(query)
+    );
+
+    model.addAttribute(
+            "stories",
+            postService.searchByType(query, PostType.STORY)
+    );
+
+    model.addAttribute(
+            "poems",
+            postService.searchByType(query, PostType.POEM)
+    );
+
+    model.addAttribute(
+            "reviews",
+            postService.searchByType(query, PostType.REVIEW)
+    );
+
+    model.addAttribute(
+            "articles",
+            postService.searchByType(query, PostType.ARTICLE)
+    );
+
+    model.addAttribute(
+            "quotes",
+            postService.searchByType(query, PostType.QUOTE)
+    );
+
+    return "search";
+}
 
     @GetMapping("/profile/{username}")
     public String getSearchedUser(@PathVariable("username") String username, Model model , Principal principal){

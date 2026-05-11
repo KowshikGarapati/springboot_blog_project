@@ -1,4 +1,5 @@
 package com.example.hello.models;
+import com.example.hello.models.PostType;
 import java.time.LocalDateTime;
 
 import jakarta.persistence.*;
@@ -33,7 +34,7 @@ public class Post {
     private User author ;
 
     @Enumerated(EnumType.STRING)
-    private PostType type;
+    private PostType postType;
 
     private String bookTitle;
 
@@ -42,7 +43,7 @@ public class Post {
     private Integer rating;
 
     private LocalDateTime createdAt;
-    
+
     public String getPostDetails(){
         return this.id.toString() + " " + this.title + "  " +this.content ;
     }

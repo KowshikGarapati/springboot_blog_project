@@ -15,8 +15,13 @@ import java.util.List;
 public interface PostRepository extends JpaRepository<Post, Long> {
     Post findByTitle(String title);
 
-    List<Post> findByType(PostType type);
+    List<Post> findByPostType(PostType type);
 
     @Query("SELECT p FROM Post p WHERE LOWER(p.title) LIKE LOWER(CONCAT('%', :query, '%')) OR p.content LIKE %:query%")
     List<Post> searchPosts(@Param("query") String query);
+
+    List<Post> findByPostTypeAndTitleContainingIgnoreCase(
+        PostType postType,
+        String title
+    );
 }

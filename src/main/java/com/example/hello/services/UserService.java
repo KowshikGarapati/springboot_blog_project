@@ -83,4 +83,12 @@ public class UserService {
         return currentUser.getFollowing().contains(targetUser);
     }
 
+    public List<User> searchUsers(String query){
+        return userRepository
+                .findByUsernameContainingIgnoreCaseOrFirstnameContainingIgnoreCase(
+                        query,
+                        query
+                );
+    }
+
 }

@@ -33,4 +33,8 @@ public class PostService {
         return postRepository.save(post) ;
     }
 
+    public List<Post> searchByType( String query, PostType type){
+        return postRepository.findByPostTypeAndTitleContainingIgnoreCase( type, query );
+    }
+
 }
