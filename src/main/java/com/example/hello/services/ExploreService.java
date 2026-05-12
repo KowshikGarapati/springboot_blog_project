@@ -21,6 +21,6 @@ public class ExploreService {
     }
     
     public List<Post> getPostsByType(PostType type){
-        return postRepository.findByType(type);
+        return postRepository.findByPostType(type);
     }
 }
