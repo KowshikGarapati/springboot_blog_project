@@ -14,79 +14,86 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
     <style>
+body{
+    background:#f5f1ea;
+    font-family:'Inter',sans-serif;
+    color:black;
+}
 
-        body{
-            background:#f5f1ea;
-            font-family:'Inter',sans-serif;
-        }
+.sidebar{
+    min-height:100vh;
+    background:white;
+    border-right:1px solid #ddd;
+    padding-top:30px;
+}
 
-        .sidebar{
-            min-height:100vh;
-            background:white;
-            border-right:1px solid #ddd;
-            padding-top:30px;
-        }
+.logo{
+    font-family:'Playfair Display',serif;
+    font-size:2rem;
+    font-weight:bold;
+    text-align:center;
+    margin-bottom:40px;
+}
 
-        .logo{
-            font-family:'Playfair Display',serif;
-            font-size:2rem;
-            font-weight:bold;
-            text-align:center;
-            margin-bottom:40px;
-        }
+.nav-link{
+    color:black;
+    margin-bottom:10px;
+    border-radius:10px;
+    padding:12px;
+}
 
-        .nav-link{
-            color:black;
-            margin-bottom:10px;
-            border-radius:10px;
-            padding:12px;
-        }
+.nav-link:hover{
+    background:#f1f1f1;
+}
 
-        .nav-link:hover{
-            background:#f1f1f1;
-        }
+.nav-link.active{
+    background:black !important;
+    color:white !important;
+}
 
-        .nav-link.active{
-            background:black;
-            color:white !important;
-        }
+.main-content{
+    padding:50px;
+}
 
-        .main-content{
-            padding:50px;
-        }
+.page-title{
+    font-family:'Playfair Display',serif;
+    font-size:3rem;
+    margin-bottom:40px;
+}
 
-        .create-card{
-            background:white;
-            border-radius:20px;
-            padding:40px;
-            box-shadow:0 2px 10px rgba(0,0,0,0.05);
-            max-width:900px;
-            margin:auto;
-        }
+.content-card{
+    background:white;
+    border-radius:20px;
+    padding:30px;
+    margin-bottom:25px;
+    box-shadow:0 2px 10px rgba(0,0,0,0.05);
+}
 
-        .page-title{
-            font-family:'Playfair Display',serif;
-            font-size:3rem;
-            margin-bottom:30px;
-        }
+.post-type{
+    display:inline-block;
+    background:black;
+    color:white;
+    padding:5px 12px;
+    border-radius:30px;
+    font-size:12px;
+    margin-bottom:15px;
+}
 
-        textarea{
-            resize:none;
-        }
+.post-title{
+    font-size:32px;
+    font-weight:bold;
+    margin-bottom:10px;
+}
 
-        .publish-btn{
-            background:black;
-            color:white;
-            border:none;
-            padding:12px 25px;
-            border-radius:10px;
-            font-size:1rem;
-        }
+.post-author{
+    color:#666;
+    margin-bottom:20px;
+}
 
-        .publish-btn:hover{
-            opacity:0.9;
-        }
-
+.post-content{
+    line-height:1.9;
+    color:#222;
+}
     </style>
 
 </head>
@@ -97,50 +104,49 @@
 
     <div class="row">
 
-        <!-- SIDEBAR -->
+<!-- SIDEBAR -->
 
-        <div class="col-md-3 col-lg-2 sidebar">
+<div class="col-md-3 col-lg-2 sidebar">
 
-            <div class="logo">
-                WriteSphere
-            </div>
+    <div class="logo">
+        WriteSphere
+    </div>
 
-            <ul class="nav flex-column px-3">
+    <ul class="nav flex-column px-3">
 
-                <li class="nav-item">
-                    <a href="/" class="nav-link">
-                        Home
-                    </a>
-                </li>
+        <li class="nav-item">
+            <a href="/" class="nav-link">
+                Home
+            </a>
+        </li>
 
-                <li class="nav-item">
-                    <a href="/explore" class="nav-link">
-                        Explore
-                    </a>
-                </li>
+        <li class="nav-item">
+            <a href="/explore" class="nav-link">
+                Explore
+            </a>
+        </li>
 
-                <li class="nav-item">
-                    <a href="/search" class="nav-link">
-                        Search
-                    </a>
-                </li>
+        <li class="nav-item">
+            <a href="/search" class="nav-link">
+                Search
+            </a>
+        </li>
 
-                <li class="nav-item">
-                    <a href="/newPost" class="nav-link active">
-                        Create
-                    </a>
-                </li>
+        <li class="nav-item">
+            <a href="/newPost" class="nav-link active">
+                Create
+            </a>
+        </li>
 
-                <li>
-                    <a href="/profile" class="nav-link">
-                        Profile
-                    </a>
-                </li>
+        <li class="nav-item">
+            <a href="/profile" class="nav-link">
+                Profile
+            </a>
+        </li>
 
-            </ul>
+    </ul>
 
-        </div>
-
+</div>
         <!-- MAIN CONTENT -->
 
         <div class="col-md-9 col-lg-10 main-content">
