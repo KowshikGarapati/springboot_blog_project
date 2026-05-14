@@ -76,12 +76,12 @@ public String search(
     return "search";
 }
 
-    @GetMapping("/profile/{username}")
+    /*@GetMapping("/profile/{username}")
     public String getSearchedUser(@PathVariable("username") String username, Model model , Principal principal){
         User searchedUser = userService.getUserByName(username);
         User currentUser = userService.getUserByName(principal.getName());
         model.addAttribute("searcheduser", searchedUser);
         model.addAttribute("isFollowedByCurrentuser", userService.isFollowing(currentUser, searchedUser));
         return "profile" ;
-    }
+    }*/
 }

@@ -1,14 +1,20 @@
 package com.example.hello.controllers;
 
 import com.example.hello.models.User;
+import com.example.hello.models.Post;
+
 import com.example.hello.services.UserService;
+import com.example.hello.services.PostService;
+
+import com.example.hello.repositories.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.stereotype.Controller;
-import com.example.hello.repositories.UserRepository;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.security.Principal;
@@ -24,10 +30,14 @@ public class HelloController {
     @Autowired
     private UserService service;
 
+    @Autowired
+    private PostService postService;
+
     @GetMapping("/")
     public String hello(Principal principal, Model model){
         User loggedUser = service.getUserByName(principal.getName());
         model.addAttribute("user", loggedUser);
+        model.addAttribute("posts", postService.getAllPosts());
         return "home" ;
     }
 
@@ -51,6 +61,13 @@ public class HelloController {
         return "postCreatingForm" ;
     }
 
+    @GetMapping("/profile")
+    public String ownerprofile(Model model, Principal principal){
+        User loggedUser = service.getUserByName(principal.getName());
+        model.addAttribute("user", loggedUser);
+        return "profile" ;
+    }
+
     @GetMapping("/editprofile")
     public String editprofile(Model model, Principal principal){
         User loggedUser = service.getUserByName(principal.getName());
@@ -71,6 +88,26 @@ public class HelloController {
         service.updateUser(principal.getName(), username, firstname, lastname, email, password, address, phone, genre );
         return "redirect:/";
     }
+
+    @GetMapping("/profile/{username}")
+    public String viewProfile(@PathVariable String username, Model model){
+
+    User user = service.getUserByName(username);
+
+    model.addAttribute("user", user);
+
+    return "profile";
+    }
+
+    @GetMapping("/post/{id}")
+    public String viewPost(@PathVariable Long id, Model model){
+
+    Post post = postService.getPostById(id);
+
+    model.addAttribute("post", post);
+
+    return "viewPost";
+}
 }
 
 

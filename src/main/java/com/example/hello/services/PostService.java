@@ -21,7 +21,7 @@ public class PostService {
     }
 
     public Post getPostById(Long id){
-        return postRepository.findById(id).orElseThrow() ;
+        return postRepository.findById(id).orElse(null);
     }
 
     public Post getPostByTitle(String title){

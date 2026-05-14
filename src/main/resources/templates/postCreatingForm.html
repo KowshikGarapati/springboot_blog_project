@@ -14,85 +14,96 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 
     <style>
-body{
-    background:#f5f1ea;
-    font-family:'Inter',sans-serif;
-    color:black;
-}
+        body{
+            background:#f5f1ea;
+            font-family:'Inter',sans-serif;
+            color:black;
+        }
 
-.sidebar{
-    min-height:100vh;
-    background:white;
-    border-right:1px solid #ddd;
-    padding-top:30px;
-}
+        .sidebar{
+            min-height:100vh;
+            background:white;
+            border-right:1px solid #ddd;
+            padding-top:30px;
+        }
 
-.logo{
-    font-family:'Playfair Display',serif;
-    font-size:2rem;
-    font-weight:bold;
-    text-align:center;
-    margin-bottom:40px;
-}
+        .logo{
+            font-family:'Playfair Display',serif;
+            font-size:2rem;
+            font-weight:bold;
+            text-align:center;
+            margin-bottom:40px;
+        }
 
-.nav-link{
-    color:black;
-    margin-bottom:10px;
-    border-radius:10px;
-    padding:12px;
-}
+        .nav-link{
+            color:black;
+            margin-bottom:10px;
+            border-radius:10px;
+            padding:12px;
+        }
 
-.nav-link:hover{
-    background:#f1f1f1;
-}
+        .nav-link:hover{
+            background:#f1f1f1;
+        }
 
-.nav-link.active{
+        .nav-link.active{
+            background:black !important;
+            color:white !important;
+        }
+
+        .main-content{
+            padding:50px;
+        }
+
+        .page-title{
+            font-family:'Playfair Display',serif;
+            font-size:3rem;
+            margin-bottom:40px;
+        }
+
+        .content-card{
+            background:white;
+            border-radius:20px;
+            padding:30px;
+            margin-bottom:25px;
+            box-shadow:0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .post-type{
+            display:inline-block;
+            background:black;
+            color:white;
+            padding:5px 12px;
+            border-radius:30px;
+            font-size:12px;
+            margin-bottom:15px;
+        }
+
+        .post-title{
+            font-size:32px;
+            font-weight:bold;
+            margin-bottom:10px;
+        }
+
+        .post-author{
+            color:#666;
+            margin-bottom:20px;
+        }
+
+        .post-content{
+            line-height:1.9;
+            color:#222;
+        }
+
+        .publish-btn{
     background:black !important;
     color:white !important;
-}
-
-.main-content{
-    padding:50px;
-}
-
-.page-title{
-    font-family:'Playfair Display',serif;
-    font-size:3rem;
-    margin-bottom:40px;
-}
-
-.content-card{
-    background:white;
-    border-radius:20px;
-    padding:30px;
-    margin-bottom:25px;
-    box-shadow:0 2px 10px rgba(0,0,0,0.05);
-}
-
-.post-type{
+    border:none !important;
+    padding:12px 25px;
+    border-radius:10px;
+    font-size:1rem;
+    font-weight:500;
     display:inline-block;
-    background:black;
-    color:white;
-    padding:5px 12px;
-    border-radius:30px;
-    font-size:12px;
-    margin-bottom:15px;
-}
-
-.post-title{
-    font-size:32px;
-    font-weight:bold;
-    margin-bottom:10px;
-}
-
-.post-author{
-    color:#666;
-    margin-bottom:20px;
-}
-
-.post-content{
-    line-height:1.9;
-    color:#222;
 }
     </style>
 

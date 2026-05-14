@@ -191,10 +191,9 @@ body{
                 <div class="section-title">
                     Users
                 </div>
-
                 <div th:each="user : ${users}"
                      class="result-card">
-
+                
                     <a th:href="@{/profile/{username}(username=${user.username})}"
                        style="text-decoration:none;color:inherit;">
 
@@ -203,13 +202,13 @@ body{
                         </div>
 
                         <div class="post-content"
-                             th:text="${user.email}">
+                            th:text="${#strings.abbreviate(post.content,150)}">
                         </div>
 
                     </a>
 
                 </div>
-
+                
             </div>
 
             <!-- STORIES -->
@@ -219,6 +218,8 @@ body{
                 <div class="section-title">
                     Stories
                 </div>
+                <a th:href="@{/post/{id}(id=${post.id})}"
+   style="text-decoration:none;color:inherit;">
 
                 <div th:each="post : ${stories}"
                      class="result-card">
@@ -232,11 +233,22 @@ body{
                     </div>
 
                     <div class="post-content"
-                         th:text="${post.content}">
+                        th:text="${#strings.abbreviate(post.content,150)}">
+                    </div>
+
+                    <div class="post-author">
+
+                        by
+                    
+                        <a th:href="@{/profile/{username}(username=${post.author.username})}"
+                           th:text="${post.author.username}"
+                           style="text-decoration:none;color:black;font-weight:600;">
+                        </a>
+                    
                     </div>
 
                 </div>
-
+                </a>
             </div>
 
             <!-- REVIEWS -->
@@ -246,10 +258,12 @@ body{
                 <div class="section-title">
                     Book Reviews
                 </div>
-
+                
                 <div th:each="post : ${reviews}"
                      class="result-card">
-
+                     <a th:href="@{/post/{id}(id=${post.id})}"
+                     style="text-decoration:none;color:inherit;">
+                  
                     <div class="post-type">
                         Review
                     </div>
@@ -259,11 +273,21 @@ body{
                     </div>
 
                     <div class="post-content"
-                         th:text="${post.content}">
+                        th:text="${#strings.abbreviate(post.content,150)}">
                     </div>
 
-                </div>
+                    <div class="post-author">
 
+                        by
+                    
+                        <a th:href="@{/profile/{username}(username=${post.author.username})}"
+                           th:text="${post.author.username}"
+                           style="text-decoration:none;color:black;font-weight:600;">
+                        </a>
+                    
+                    </div>
+                    </a>
+                </div>
             </div>
 
         </div>
