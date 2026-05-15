@@ -16,17 +16,18 @@ import lombok.Builder;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Builder
     private String title;
 
     @Lob
     @Column(columnDefinition = "TEXT")
     private String content;
     private int likes;
+    private int views;
 
 
     @ManyToOne
@@ -46,5 +47,10 @@ public class Post {
 
     public String getPostDetails(){
         return this.id.toString() + " " + this.title + "  " +this.content ;
+    }
+
+    @PrePersist
+    public void createdNow(){
+        createdAt = LocalDateTime.now();
     }
 }

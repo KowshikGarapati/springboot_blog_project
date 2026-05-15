@@ -273,7 +273,7 @@ body{
                     </div>
 
                     <div class="post-content"
-                        th:text="${#strings.abbreviate(post.content,150)}">
+                        th:text="${post.content.length() > 150 ? post.content.substring(0,150) + '...' : post.content}" >
                     </div>
 
                     <div class="post-author">

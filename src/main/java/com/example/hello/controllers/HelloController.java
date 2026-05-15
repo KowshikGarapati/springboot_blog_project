@@ -65,7 +65,7 @@ public class HelloController {
     public String ownerprofile(Model model, Principal principal){
         User loggedUser = service.getUserByName(principal.getName());
         model.addAttribute("user", loggedUser);
-        return "profile" ;
+        return "user_profile" ;
     }
 
     @GetMapping("/editprofile")
