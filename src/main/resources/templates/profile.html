@@ -304,6 +304,36 @@
 
                     </div>
 
+                    <div th:if="${loggedUser.username != user.username}">
+
+                        <form th:if="${!isFollowing}"
+                              th:action="@{/follow/{username}(username=${user.username})}"
+                              method="post">
+                              <input type="hidden"
+                              th:name="${_csrf.parameterName}"
+                              th:value="${_csrf.token}" />
+                            <button type="submit"
+                                    class="btn btn-dark mt-3">
+                                Follow
+                            </button>
+                    
+                        </form>
+                    
+                        <form th:if="${isFollowing}"
+                              th:action="@{/unfollow/{username}(username=${user.username})}"
+                              method="post">
+                              <input type="hidden"
+                              th:name="${_csrf.parameterName}"
+                              th:value="${_csrf.token}" />
+                            <button type="submit"
+                                    class="btn btn-outline-dark mt-3">
+                                Following
+                            </button>
+                    
+                        </form>
+                    
+                    </div>
+
                     <div class="col-md-6">
 
                         <div class="info-label">

@@ -54,18 +54,6 @@ public class APIController {
         return new ResponseEntity<>(headers, HttpStatus.FOUND);
     }
 
-    @GetMapping("/users/getSessionId")
-    public String getSessionId(HttpServletRequest http){
-        return http.getSession().getId();
-    }
-
-//use this same method to display the logged in user's data on the home page
-    @GetMapping("/loggedUser")
-    public User getLoggedUser(Principal principal){
-        String loggedUserName = principal.getName() ;
-        User loggedUser = userService.getUserByName(loggedUserName);
-        return loggedUser ;
-    }
 
 }
 

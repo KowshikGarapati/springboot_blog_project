@@ -89,15 +89,27 @@ public class HelloController {
         return "redirect:/";
     }
 
-    @GetMapping("/profile/{username}")
-    public String viewProfile(@PathVariable String username, Model model){
+    @GetMapping("/user/{username}")
+public String viewUserProfile(@PathVariable String username,
+                              Principal principal,
+                              Model model){
 
-    User user = service.getUserByName(username);
+    User profileUser = service.getUserByName(username);
 
-    model.addAttribute("user", user);
+    User loggedUser = service.getUserByName(principal.getName());
+
+    boolean isFollowing =
+            loggedUser.getFollowing().contains(profileUser);
+
+    model.addAttribute("user", profileUser);
+
+    model.addAttribute("loggedUser", loggedUser);
+
+    model.addAttribute("isFollowing", isFollowing);
 
     return "profile";
-    }
+}
+    
 
     @GetMapping("/post/{id}")
     public String viewPost(@PathVariable Long id, Model model){
@@ -107,6 +119,24 @@ public class HelloController {
     model.addAttribute("post", post);
 
     return "viewPost";
+    }
+
+    @PostMapping("/follow/{username}")
+public String followUser(@PathVariable String username,
+                         Principal principal){
+
+    service.followUser(principal.getName(), username);
+
+    return "redirect:/user/" + username;
+}
+
+@PostMapping("/unfollow/{username}")
+public String unfollowUser(@PathVariable String username,
+                           Principal principal){
+
+    service.unfollowUser(principal.getName(), username);
+
+    return "redirect:/user/" + username;
 }
 }
 

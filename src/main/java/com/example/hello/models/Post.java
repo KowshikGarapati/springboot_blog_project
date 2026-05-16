@@ -16,11 +16,12 @@ import lombok.Builder;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Post {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Builder
+
     private String title;
 
     @Lob
