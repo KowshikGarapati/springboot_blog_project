@@ -57,6 +57,9 @@ public class User {
     @ManyToMany(mappedBy = "following")
     private Set<User> followers = new HashSet<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Like> likes;
+
     public void getDetails() {
         System.out.println(this.id + " " + this.firstname + " " + this.email);
     }

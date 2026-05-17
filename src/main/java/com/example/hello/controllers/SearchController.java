@@ -31,57 +31,47 @@ public class SearchController {
     }
 
     @GetMapping("/search")
-    public String showSearchPage() {
-        return "search"; // Your Thymeleaf HTML file
-    }
-
-    @PostMapping("/search")
-public String search(
-        @RequestParam String query,
+public String showSearchPage(
+        @RequestParam(required = false) String query,
         Model model
 ) {
 
     model.addAttribute("query", query);
 
-    model.addAttribute(
-            "users",
-            userService.searchUsers(query)
-    );
+    if(query != null && !query.trim().isEmpty()) {
 
-    model.addAttribute(
-            "stories",
-            postService.searchByType(query, PostType.STORY)
-    );
+        model.addAttribute(
+                "users",
+                userService.searchUsers(query)
+        );
 
-    model.addAttribute(
-            "poems",
-            postService.searchByType(query, PostType.POEM)
-    );
+        model.addAttribute(
+                "stories",
+                postService.searchByType(query, PostType.STORY)
+        );
 
-    model.addAttribute(
-            "reviews",
-            postService.searchByType(query, PostType.REVIEW)
-    );
+        model.addAttribute(
+                "poems",
+                postService.searchByType(query, PostType.POEM)
+        );
 
-    model.addAttribute(
-            "articles",
-            postService.searchByType(query, PostType.ARTICLE)
-    );
+        model.addAttribute(
+                "reviews",
+                postService.searchByType(query, PostType.REVIEW)
+        );
 
-    model.addAttribute(
-            "quotes",
-            postService.searchByType(query, PostType.QUOTE)
-    );
+        model.addAttribute(
+                "articles",
+                postService.searchByType(query, PostType.ARTICLE)
+        );
+
+        model.addAttribute(
+                "quotes",
+                postService.searchByType(query, PostType.QUOTE)
+        );
+    }
 
     return "search";
 }
 
-    /*@GetMapping("/profile/{username}")
-    public String getSearchedUser(@PathVariable("username") String username, Model model , Principal principal){
-        User searchedUser = userService.getUserByName(username);
-        User currentUser = userService.getUserByName(principal.getName());
-        model.addAttribute("searcheduser", searchedUser);
-        model.addAttribute("isFollowedByCurrentuser", userService.isFollowing(currentUser, searchedUser));
-        return "profile" ;
-    }*/
 }

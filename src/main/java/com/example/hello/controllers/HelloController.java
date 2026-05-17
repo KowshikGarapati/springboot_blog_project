@@ -4,6 +4,7 @@ import com.example.hello.models.User;
 import com.example.hello.models.Post;
 
 import com.example.hello.services.UserService;
+import com.example.hello.services.LikeService;
 import com.example.hello.services.PostService;
 
 import com.example.hello.repositories.UserRepository;
@@ -32,6 +33,9 @@ public class HelloController {
 
     @Autowired
     private PostService postService;
+
+    @Autowired
+    private LikeService likeService;
 
     @GetMapping("/")
     public String hello(Principal principal, Model model){
@@ -117,8 +121,28 @@ public String viewUserProfile(@PathVariable String username,
     Post post = postService.getPostById(id);
 
     model.addAttribute("post", post);
+    model.addAttribute(
+        "likeCount",
+        likeService.getLikeCount(post)
+    );
 
     return "viewPost";
+    }
+
+    @GetMapping("/post/like/{id}")
+    public String toggleLike(
+            @PathVariable Long id,
+            Principal principal
+    ){
+
+        Post post = postService.getPostById(id);
+
+        User user = service
+                .getUserByName(principal.getName());
+
+        likeService.toggleLike(user, post);
+
+        return "redirect:/post/" + id;
     }
 
     @PostMapping("/follow/{username}")

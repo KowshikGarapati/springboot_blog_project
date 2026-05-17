@@ -158,7 +158,7 @@ body{
             <div class="search-box">
 
                 <form th:action="@{/search}"
-                      method="post"
+                      method="get"
                       class="d-flex gap-2">
 
                     <input type="hidden"
@@ -242,7 +242,7 @@ body{
 
                 by
 
-                <a th:href="@{/profile/{username}(username=${post.author.username})}"
+                <a th:href="@{/user/{username}(username=${post.author.username})}"
                    th:text="${post.author.username}"
                    style="text-decoration:none;color:black;font-weight:600;">
                 </a>
@@ -263,7 +263,7 @@ body{
                     Book Reviews
                 </div>
                 
-                <div th:each="post : ${stories}">
+                <div th:each="post : ${reviews}">
 
                     <div th:if="${post != null}"
                          class="result-card">
@@ -286,7 +286,91 @@ body{
 
                         by
                     
-                        <a th:href="@{/profile/{username}(username=${post.author.username})}"
+                        <a th:href="@{/user/{username}(username=${post.author.username})}"
+                           th:text="${post.author.username}"
+                           style="text-decoration:none;color:black;font-weight:600;">
+                        </a>
+                    
+                    </div>
+                    </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POEMS -->
+
+            <div th:if="${poems != null and !poems.isEmpty()}">
+
+                <div class="section-title">
+                    Poems
+                </div>
+                
+                <div th:each="post : ${poems}">
+
+                    <div th:if="${post != null}"
+                         class="result-card">
+                     <a th:href="@{/post/{id}(id=${post.id})}"
+                     style="text-decoration:none;color:inherit;">
+                  
+                    <div class="post-type">
+                        Poem
+                    </div>
+
+                    <div class="post-title"
+                         th:text="${post.title}">
+                    </div>
+
+                    <div class="post-content"
+                        th:text="${post.content != null ? (post.content.length() > 150 ? post.content.substring(0,150) + '...' : post.content) : ''}">
+                    </div>
+
+                    <div class="post-author">
+
+                        by
+                    
+                        <a th:href="@{/user/{username}(username=${post.author.username})}"
+                           th:text="${post.author.username}"
+                           style="text-decoration:none;color:black;font-weight:600;">
+                        </a>
+                    
+                    </div>
+                    </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUOTES -->
+
+            <div th:if="${quotes != null and !quotes.isEmpty()}">
+
+                <div class="section-title">
+                    Quotes
+                </div>
+                
+                <div th:each="post : ${quotes}">
+
+                    <div th:if="${post != null}"
+                         class="result-card">
+                     <a th:href="@{/post/{id}(id=${post.id})}"
+                     style="text-decoration:none;color:inherit;">
+                  
+                    <div class="post-type">
+                        Quote
+                    </div>
+
+                    <div class="post-title"
+                         th:text="${post.title}">
+                    </div>
+
+                    <div class="post-content"
+                        th:text="${post.content != null ? (post.content.length() > 150 ? post.content.substring(0,150) + '...' : post.content) : ''}">
+                    </div>
+
+                    <div class="post-author">
+
+                        by
+                    
+                        <a th:href="@{/user/{username}(username=${post.author.username})}"
                            th:text="${post.author.username}"
                            style="text-decoration:none;color:black;font-weight:600;">
                         </a>

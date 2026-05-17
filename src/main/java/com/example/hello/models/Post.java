@@ -1,7 +1,7 @@
 package com.example.hello.models;
 import com.example.hello.models.PostType;
 import java.time.LocalDateTime;
-
+import java.util.List;
 import jakarta.persistence.*;
 
 import lombok.Getter;
@@ -27,7 +27,9 @@ public class Post {
     @Lob
     @Column(columnDefinition = "TEXT")
     private String content;
-    private int likes;
+
+    @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
+    private List<Like> likedBy;
     private int views;
 
 
