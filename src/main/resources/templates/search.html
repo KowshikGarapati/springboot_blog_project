@@ -194,15 +194,11 @@ body{
                 <div th:each="user : ${users}"
                      class="result-card">
                 
-                    <a th:href="@{/profile/{username}(username=${user.username})}"
+                    <a th:href="@{/user/{username}(username=${user.username})}"
                        style="text-decoration:none;color:inherit;">
 
                         <div class="post-title"
                              th:text="${user.username}">
-                        </div>
-
-                        <div class="post-content"
-                            th:text="${#strings.abbreviate(post.content,150)}">
                         </div>
 
                     </a>
@@ -213,43 +209,51 @@ body{
 
             <!-- STORIES -->
 
-            <div th:if="${stories != null and !stories.isEmpty()}">
+<div th:if="${stories != null and !stories.isEmpty()}">
 
-                <div class="section-title">
-                    Stories
+    <div class="section-title">
+        Stories
+    </div>
+
+    <div th:each="post : ${stories}">
+
+        <div th:if="${post != null}"
+             class="result-card">
+
+            <a th:href="@{/post/{id}(id=${post.id})}"
+               style="text-decoration:none;color:inherit;display:block;">
+
+                <div class="post-type">
+                    Story
                 </div>
-                <a th:href="@{/post/{id}(id=${post.id})}"
-   style="text-decoration:none;color:inherit;">
 
-                <div th:each="post : ${stories}"
-                     class="result-card">
-
-                    <div class="post-type">
-                        Story
-                    </div>
-
-                    <div class="post-title"
-                         th:text="${post.title}">
-                    </div>
-
-                    <div class="post-content"
-                        th:text="${#strings.abbreviate(post.content,150)}">
-                    </div>
-
-                    <div class="post-author">
-
-                        by
-                    
-                        <a th:href="@{/profile/{username}(username=${post.author.username})}"
-                           th:text="${post.author.username}"
-                           style="text-decoration:none;color:black;font-weight:600;">
-                        </a>
-                    
-                    </div>
-
+                <div class="post-title"
+                     th:text="${post.title}">
                 </div>
+
+                <div class="post-content"
+                     style="max-height:90px; overflow:hidden;"
+                     th:text="${post.content}">
+                </div>
+
+            </a>
+
+            <div class="post-author">
+
+                by
+
+                <a th:href="@{/profile/{username}(username=${post.author.username})}"
+                   th:text="${post.author.username}"
+                   style="text-decoration:none;color:black;font-weight:600;">
                 </a>
+
             </div>
+
+        </div>
+
+    </div>
+
+</div>
 
             <!-- REVIEWS -->
 
@@ -259,8 +263,10 @@ body{
                     Book Reviews
                 </div>
                 
-                <div th:each="post : ${reviews}"
-                     class="result-card">
+                <div th:each="post : ${stories}">
+
+                    <div th:if="${post != null}"
+                         class="result-card">
                      <a th:href="@{/post/{id}(id=${post.id})}"
                      style="text-decoration:none;color:inherit;">
                   
@@ -273,7 +279,7 @@ body{
                     </div>
 
                     <div class="post-content"
-                        th:text="${post.content.length() > 150 ? post.content.substring(0,150) + '...' : post.content}" >
+                        th:text="${post.content != null ? (post.content.length() > 150 ? post.content.substring(0,150) + '...' : post.content) : ''}">
                     </div>
 
                     <div class="post-author">
@@ -287,6 +293,7 @@ body{
                     
                     </div>
                     </a>
+                    </div>
                 </div>
             </div>
 
