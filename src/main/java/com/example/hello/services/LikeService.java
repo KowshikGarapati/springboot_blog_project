@@ -13,8 +13,13 @@ import java.util.Optional;
 @Service
 public class LikeService {
 
+    private final PostService postService;
     @Autowired
     private LikeRepository likeRepository;
+
+    LikeService(PostService postService) {
+        this.postService = postService;
+    }
 
     public void toggleLike(User user, Post post){
 
@@ -24,6 +29,7 @@ public class LikeService {
         if(existingLike.isPresent()){
 
             likeRepository.delete(existingLike.get());
+            post.removeLike();
 
         } else {
 
@@ -33,6 +39,7 @@ public class LikeService {
                     .build();
 
             likeRepository.save(like);
+            post.addLike();
         }
     }
 

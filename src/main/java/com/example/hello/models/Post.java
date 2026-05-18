@@ -30,6 +30,7 @@ public class Post {
 
     @OneToMany(mappedBy = "post", cascade = CascadeType.ALL)
     private List<Like> likedBy;
+    private int likeCount ;
     private int views;
 
 
@@ -53,7 +54,15 @@ public class Post {
     }
 
     @PrePersist
-    public void createdNow(){
-        createdAt = LocalDateTime.now();
+    public void prePersist(){
+        this.createdAt = LocalDateTime.now();
+    }
+
+    public void addLike(){
+        this.setLikeCount(this.getLikeCount() + 1) ;
+    }
+
+    public void removeLike(){
+        this.setLikeCount(this.getLikeCount() - 1) ;
     }
 }

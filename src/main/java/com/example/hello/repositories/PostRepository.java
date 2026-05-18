@@ -24,4 +24,12 @@ public interface PostRepository extends JpaRepository<Post, Long> {
         PostType postType,
         String title
     );
+
+    @Query("""
+SELECT p FROM Post p
+ORDER BY 
+(p.likeCount * 3) DESC,
+p.createdAt DESC
+""")
+List<Post> getRecommendedPosts();
 }

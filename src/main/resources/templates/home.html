@@ -160,25 +160,37 @@
 
             <div th:if="${posts != null and !posts.isEmpty()}">
 
-                <div th:each="post : ${posts}" class="post-card">
+                <div th:each="post : ${posts}">
 
-                    <div class="post-type"
-                         th:text="${post.postType}">
+                    <div th:if="${post != null}"
+                         class="result-card">
+                     <a th:href="@{/post/{id}(id=${post.id})}"
+                     style="text-decoration:none;color:inherit;">
+                  
+                    <div class="post-type" th:text="${post.postType}">
+                        
                     </div>
 
                     <div class="post-title"
                          th:text="${post.title}">
                     </div>
 
-                    <div class="post-author">
-                        by
-                        <span th:text="${post.author.username}"></span>
-                    </div>
-
                     <div class="post-content"
-                         th:text="${post.content}">
+                        th:text="${post.content != null ? (post.content.length() > 150 ? post.content.substring(0,150) + '...' : post.content) : ''}">
                     </div>
 
+                    <div class="post-author">
+
+                        by
+                    
+                        <a th:href="@{/user/{username}(username=${post.author.username})}"
+                           th:text="${post.author.username}"
+                           style="text-decoration:none;color:black;font-weight:600;">
+                        </a>
+                    
+                    </div>
+                    </a>
+                    </div>
                 </div>
 
             </div>

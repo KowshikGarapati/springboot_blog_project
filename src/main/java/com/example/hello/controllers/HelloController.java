@@ -40,8 +40,9 @@ public class HelloController {
     @GetMapping("/")
     public String hello(Principal principal, Model model){
         User loggedUser = service.getUserByName(principal.getName());
+        List<Post> recommendedPosts = postService.getRecommendedPosts();
         model.addAttribute("user", loggedUser);
-        model.addAttribute("posts", postService.getAllPosts());
+        model.addAttribute("posts", recommendedPosts);
         return "home" ;
     }
 

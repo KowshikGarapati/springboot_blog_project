@@ -37,4 +37,7 @@ public class PostService {
         return postRepository.findByPostTypeAndTitleContainingIgnoreCase( type, query );
     }
 
+    public List<Post> getRecommendedPosts() {
+        return postRepository.getRecommendedPosts();
+    }
 }
